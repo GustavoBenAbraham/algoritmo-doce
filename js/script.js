@@ -12,7 +12,29 @@ function typeWriter() {
     }
 }
 
-// Objeto de produtos com sincronia exata de IDs
+// Controle do Status "Ao Vivo" (Verifica horário de atendimento)
+function checkStoreStatus() {
+    const badge = document.getElementById("status-badge");
+    const statusText = document.getElementById("status-text");
+
+    if (!badge || !statusText) return;
+
+    const now = new Date();
+    const hour = now.getHours();
+
+    // Atendimento configurado entre 09:00 e 21:00
+    const isOpen = hour >= 9 && hour < 21;
+
+    if (isOpen) {
+        badge.className = "status-badge online";
+        statusText.innerText = "ONLINE | Cozinha Rodando";
+    } else {
+        badge.className = "status-badge offline";
+        statusText.innerText = "OFFLINE | Faça seu Agendamento";
+    }
+}
+
+// Objeto de produtos do carrinho
 const cart = {
     'brigadeiro': { name: 'Brigadeiro Gourmet', qty: 0, price: 5.00 },
     'pacoca': { name: 'Paçoca Gourmet', qty: 0, price: 5.00 },
@@ -57,7 +79,6 @@ function sendOrder() {
     const paymentMethod = document.getElementById("payment-method").value;
     let message = "";
 
-    // Se houver produtos adicionados, envia o pedido completo. Caso contrário, envia contato direto.
     if (total > 0) {
         message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
                   `*ITENS DO PEDIDO:*\n${orderSummary}\n` +
@@ -71,7 +92,6 @@ function sendOrder() {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5511979865999?text=${encodedMessage}`;
 
-    // Abertura direta sem bloqueio por popup
     window.location.href = whatsappUrl;
 }
 
@@ -127,5 +147,6 @@ function initCLI() {
 
 window.onload = function () {
     typeWriter();
+    checkStoreStatus();
     initCLI();
 };

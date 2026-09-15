@@ -8,6 +8,7 @@
     --accent-color: #d2a8d9;
     --accent-green: #3fb950;
     --accent-blue: #58a6ff;
+    --accent-yellow: #d29922;
 }
 
 body {
@@ -33,26 +34,58 @@ body {
     overflow: hidden;
 }
 
+/* Header com Status Ao Vivo */
 .terminal-header {
     background-color: #21262d;
     padding: 10px 15px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
     border-bottom: 1px solid var(--border-color);
 }
 
-.status-dot {
-    width: 10px;
-    height: 10px;
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.status-badge.online .status-dot {
     background-color: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.status-badge.online .status-text {
+    color: var(--accent-green);
+}
+
+.status-badge.offline .status-dot {
+    background-color: var(--accent-yellow);
+    box-shadow: 0 0 8px var(--accent-yellow);
+}
+
+.status-badge.offline .status-text {
+    color: var(--accent-yellow);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
 }
 
 .terminal-title {
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
 }
 
 .terminal-body {
@@ -299,6 +332,88 @@ code {
 .btn-primary:hover {
     background-color: #c091c8;
     border-color: #c091c8;
+}
+
+/* Seção Code Reviews (Depoimentos) */
+.reviews-section {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.reviews-header {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.reviews-title {
+    color: var(--accent-color);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: left;
+}
+
+.review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 5px;
+}
+
+.review-pr {
+    color: var(--accent-green);
+    font-size: 0.7rem;
+    font-weight: bold;
+    background-color: rgba(63, 185, 80, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    white-space: nowrap;
+}
+
+.review-stars {
+    color: #f1e05a;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.review-comment {
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+    font-style: italic;
+}
+
+.review-author {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.author-user {
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+.author-role {
+    color: var(--text-secondary);
+    font-size: 0.7rem;
 }
 
 /* Seção Sobre Nós */

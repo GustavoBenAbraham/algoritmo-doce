@@ -12,16 +12,19 @@
     <div id="system-toast" class="toast hidden"></div>
 
     <div class="terminal-container">
-        <!-- Cabeçalho do Terminal -->
+        <!-- Cabeçalho do Terminal com Status Ao Vivo -->
         <div class="terminal-header">
-            <span class="status-dot"></span>
-            <span class="terminal-title">algoritmo-doce@production:~</span>
+            <div class="status-badge online" id="status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text" id="status-text">ONLINE | Cozinha Rodando</span>
+            </div>
+            <span class="terminal-title">algoritmo-doce@prod</span>
         </div>
 
         <!-- Corpo do Terminal -->
         <div class="terminal-body">
             <h1 class="brand-title">ALGORITMO DOCE</h1>
-            <div class="version">v1.6.0</div>
+            <div class="version">v1.7.0</div>
             <div class="tagline" id="typing-text"></div>
 
             <!-- Bloco de Código Fake -->
@@ -117,6 +120,55 @@
                 <div class="links-section">
                     <button onclick="sendOrder()" class="btn btn-primary">[ EXECUTAR PEDIDO - WhatsApp ]</button>
                     <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" class="btn">[ INSTAGRAM ]</a>
+                </div>
+            </section>
+
+            <!-- Seção Code Reviews (Depoimentos) -->
+            <section class="reviews-section">
+                <p class="code-comment">// git log --reviews --approved</p>
+                <div class="reviews-header">
+                    <h3 class="reviews-title">CODE_REVIEWS (Depoimentos)</h3>
+                </div>
+
+                <div class="reviews-list">
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <div class="review-top">
+                            <span class="review-pr">PR #102 MERGED</span>
+                            <span class="review-stars">★★★★★</span>
+                        </div>
+                        <p class="review-comment">"Glicose 100% aprovada! Salva minhas noites de programação antes das entregas."</p>
+                        <div class="review-author">
+                            <span class="author-user">@dev_lucas</span>
+                            <span class="author-role">Fullstack Engineer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card">
+                        <div class="review-top">
+                            <span class="review-pr">PR #089 MERGED</span>
+                            <span class="review-stars">★★★★★</span>
+                        </div>
+                        <p class="review-comment">"O brigadeiro de paçoca é simplesmente perfeito. Código sem bugs e brigadeiro sem defeitos!"</p>
+                        <div class="review-author">
+                            <span class="author-user">@mariana.tech</span>
+                            <span class="author-role">Frontend Developer</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="review-card">
+                        <div class="review-top">
+                            <span class="review-pr">PR #074 MERGED</span>
+                            <span class="review-stars">★★★★★</span>
+                        </div>
+                        <p class="review-comment">"Entrega rápida e embalagem caprichada. Já virou vício do nosso time no escritório."</p>
+                        <div class="review-author">
+                            <span class="author-user">@carlos_backend</span>
+                            <span class="author-role">Tech Lead</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 

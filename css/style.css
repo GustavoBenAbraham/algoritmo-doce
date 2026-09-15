@@ -238,7 +238,7 @@ code {
     border-color: #c091c8;
 }
 
-/* Seção Sobre Nós */
+/* Seção Sobre Nós & Ajuste Responsivo da Foto */
 .about-section {
     width: 100%;
     margin-top: 10px;
@@ -254,7 +254,8 @@ code {
 
 .about-img-placeholder {
     width: 100%;
-    height: 180px;
+    height: auto;
+    min-height: 180px;
     background-color: #161b22;
     border: 1px dashed var(--border-color);
     border-radius: 6px;
@@ -269,15 +270,15 @@ code {
 .about-img-placeholder span {
     color: var(--text-secondary);
     font-size: 0.8rem;
+    padding: 20px;
 }
 
 .about-img-placeholder img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: auto;
+    display: block;
+    position: relative;
+    object-fit: contain;
 }
 
 .about-title {

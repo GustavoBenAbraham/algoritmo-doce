@@ -12,7 +12,7 @@ function typeWriter() {
     }
 }
 
-// Objeto do Carrinho com as chaves sincronizadas
+// Objeto de produtos com sincronia exata de IDs
 const cart = {
     'brigadeiro': { name: 'Brigadeiro Gourmet', qty: 0, price: 5.00 },
     'pacoca': { name: 'Paçoca Gourmet', qty: 0, price: 5.00 },
@@ -20,7 +20,6 @@ const cart = {
     'bichoDePe': { name: 'Bicho de Pé Gourmet', qty: 0, price: 5.00 }
 };
 
-// Altera quantidade de itens
 function changeQty(itemKey, delta) {
     if (cart[itemKey]) {
         cart[itemKey].qty = Math.max(0, cart[itemKey].qty + delta);
@@ -32,7 +31,6 @@ function changeQty(itemKey, delta) {
     }
 }
 
-// Atualiza o total exibido
 function updateCartTotal() {
     let total = 0;
     for (const key in cart) {
@@ -44,20 +42,7 @@ function updateCartTotal() {
     }
 }
 
-// 1. Ação para abrir WhatsApp diretamente sem exigir produtos
-function directWhatsApp() {
-    const defaultMessage = "Olá! Gostaria de fazer um pedido na Algoritmo Doce! 🍫";
-    const encodedMessage = encodeURIComponent(defaultMessage);
-    const whatsappUrl = `https://wa.me/5511979865999?text=${encodedMessage}`;
-    
-    showToast("[REDIRECT]: Abrindo conversa no WhatsApp...");
-    setTimeout(() => {
-        window.open(whatsappUrl, "_blank");
-    }, 800);
-}
-
-// 2. Ação para finalizar pedido montado no carrinho
-function checkoutOrder() {
+function sendOrder() {
     let orderSummary = "";
     let total = 0;
 
@@ -69,26 +54,25 @@ function checkoutOrder() {
         }
     }
 
-    if (total === 0) {
-        showToast("[AVISO]: Adicione itens (+ e -) para enviar pelo carrinho!");
-        return;
-    }
-
     const paymentMethod = document.getElementById("payment-method").value;
-    
-    const message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
-                    `*ITENS DO PEDIDO:*\n${orderSummary}\n` +
-                    `*VALOR TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
-                    `*FORMA DE PAGAMENTO:* ${paymentMethod}\n\n` +
-                    `_Aguardando confirmação para preparo!_`;
+    let message = "";
+
+    // Se houver produtos adicionados, envia o pedido completo. Caso contrário, envia contato direto.
+    if (total > 0) {
+        message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
+                  `*ITENS DO PEDIDO:*\n${orderSummary}\n` +
+                  `*VALOR TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
+                  `*FORMA DE PAGAMENTO:* ${paymentMethod}\n\n` +
+                  `_Aguardando confirmação para preparo!_`;
+    } else {
+        message = `Olá! Gostaria de fazer um pedido na Algoritmo Doce! 🍫`;
+    }
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5511979865999?text=${encodedMessage}`;
 
-    showToast("[SUCCESS]: Compilando carrinho e abrindo WhatsApp...");
-    setTimeout(() => {
-        window.open(whatsappUrl, "_blank");
-    }, 1000);
+    // Abertura direta sem bloqueio por popup
+    window.location.href = whatsappUrl;
 }
 
 // Toast System
@@ -103,7 +87,7 @@ function showToast(message) {
     }
 }
 
-// CLI Interativo
+// Console CLI Interativo
 function initCLI() {
     const input = document.getElementById("cli-input");
     const output = document.getElementById("cli-output");
@@ -121,7 +105,7 @@ function initCLI() {
                     output.innerText = "Comandos: 'pedir', 'cupom', 'limpar', 'status'";
                     break;
                 case "pedir":
-                    directWhatsApp();
+                    sendOrder();
                     break;
                 case "cupom":
                     output.innerText = "[CUPOM ENCONTRADO]: Use 'DEV10' no WhatsApp para 10% de desconto!";

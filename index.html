@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algoritmo Doce | v1.0.0</title>
+    <title>Algoritmo Doce | v1.5.0</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <!-- Toast de Notificação do Sistema -->
+    <div id="system-toast" class="toast hidden"></div>
 
     <div class="terminal-container">
         <!-- Banner do Terminal -->
@@ -18,9 +21,8 @@
         <!-- Conteúdo Principal -->
         <main class="terminal-body">
             <h1 class="brand-title">ALGORITMO DOCE</h1>
-            <p class="version">v1.0.0</p>
+            <p class="version">v1.5.0</p>
             
-            <!-- Efeito de Digitação via JS -->
             <p class="tagline" id="typing-text"></p>
 
             <!-- Bloco do Catálogo -->
@@ -34,12 +36,10 @@
 };</code></pre>
             </div>
 
-            <!-- Comentário do código (fora do grid para não quebrar o layout) -->
             <p class="code-comment">// instâncias dos produtos</p>
 
             <!-- Seção de Sabores (Grid 2x2) -->
             <div class="products-container">
-                <!-- Produto 1 -->
                 <div class="product-card">
                     <div class="product-img-placeholder">
                         <img src="assets/brigadeiro.jpg" alt="Brigadeiro Gourmet" onerror="this.style.display='none'">
@@ -51,7 +51,6 @@
                     <p class="product-price">R$ 5,00 / un</p>
                 </div>
 
-                <!-- Produto 2 -->
                 <div class="product-card">
                     <div class="product-img-placeholder">
                         <img src="assets/pacoca.jpg" alt="Paçoca Gourmet" onerror="this.style.display='none'">
@@ -63,7 +62,6 @@
                     <p class="product-price">R$ 5,00 / un</p>
                 </div>
 
-                <!-- Produto 3 -->
                 <div class="product-card">
                     <div class="product-img-placeholder">
                         <img src="assets/beijinho.jpg" alt="Beijinho Gourmet" onerror="this.style.display='none'">
@@ -75,7 +73,6 @@
                     <p class="product-price">R$ 5,00 / un</p>
                 </div>
 
-                <!-- Produto 4 -->
                 <div class="product-card">
                     <div class="product-img-placeholder">
                         <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé Gourmet" onerror="this.style.display='none'">
@@ -90,7 +87,7 @@
 
             <!-- Botões Principais -->
             <section class="links-section">
-                <a href="https://wa.me/5511979865999?text=Olá!%20Vim%20pelo%20site%20da%20Algoritmo%20Doce!" target="_blank" class="btn btn-primary">[ FAZER PEDIDO - Caixinhas e Encomendas ]</a>
+                <a href="https://wa.me/5511979865999?text=Olá!%20Vim%20pelo%20site%20da%20Algoritmo%20Doce!" target="_blank" id="btn-whatsapp" class="btn btn-primary">[ FAZER PEDIDO - Caixinhas e Encomendas ]</a>
                 <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" class="btn">[ INSTAGRAM ]</a>
             </section>
 
@@ -111,10 +108,21 @@
                     </p>
                 </div>
             </section>
+
+            <!-- Seção CLI Interativo -->
+            <section class="cli-section">
+                <p class="code-comment">// interaja via terminal (digite 'ajuda')</p>
+                <div class="cli-box">
+                    <div id="cli-output" class="cli-output">Terminal pronto. Digite 'ajuda' para ver comandos.</div>
+                    <div class="cli-input-line">
+                        <span class="cli-prompt">&gt;</span>
+                        <input type="text" id="cli-input" placeholder="Digite um comando..." autocomplete="off">
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
-    <!-- Script JavaScript Conectado -->
     <script src="js/script.js"></script>
 </body>
 </html>

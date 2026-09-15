@@ -5,7 +5,7 @@
     --border-color: #30363d;
     --text-primary: #e6edf3;
     --text-secondary: #8b949e;
-    --accent-color: #d2a8d9; /* Cor lilás/chocolate gourmet */
+    --accent-color: #d2a8d9; /* Tom lilás/chocolate gourmet */
     --accent-green: #3fb950; /* Verde terminal */
     --accent-blue: #58a6ff;  /* Azul de código */
 }
@@ -57,7 +57,7 @@ body {
     font-size: 0.85rem;
 }
 
-/* Corpo Principal (Tudo Alinhado ao Centro) */
+/* Corpo Principal */
 .terminal-body {
     padding: 25px 20px;
     display: flex;
@@ -80,13 +80,26 @@ body {
     margin-bottom: 10px;
 }
 
+/* Animação do Cursor */
+.version::after {
+    content: ' |';
+    font-weight: bold;
+    color: var(--accent-green);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .tagline {
     color: var(--text-secondary);
     font-size: 1rem;
     margin-bottom: 20px;
 }
 
-/* Bloco do Catálogo (Maior e Alinhado) */
+/* Bloco do Catálogo */
 .code-block {
     width: 100%;
     background-color: var(--bg-color);
@@ -94,27 +107,72 @@ body {
     border-radius: 8px;
     padding: 16px 20px;
     text-align: left;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     box-sizing: border-box;
 }
 
 .code-comment {
     color: var(--text-secondary);
     margin: 0 0 10px 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    text-align: left;
+    width: 100%;
 }
 
-pre {
-    margin: 0;
-}
+pre { margin: 0; }
 
 code {
     color: var(--accent-color);
-    font-size: 1.05rem; /* Aumentado para dar destaque */
+    font-size: 1.05rem;
     line-height: 1.5;
 }
 
-/* Seção de Botões */
+/* Cards de Produtos (Objetos Dev) */
+.products-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.product-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: left;
+}
+
+.product-id {
+    color: var(--accent-blue);
+    font-size: 0.7rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.product-name {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin: 0 0 4px 0;
+    letter-spacing: 1px;
+}
+
+.product-tag {
+    color: var(--accent-color);
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.product-price {
+    color: var(--accent-green);
+    font-size: 0.85rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Botões */
 .links-section {
     width: 100%;
     display: flex;
@@ -151,31 +209,4 @@ code {
 .btn-primary:hover {
     background-color: #c091c8;
     border-color: #c091c8;
-}
-
-/* Rodapé */
-.terminal-footer {
-    border-top: 1px solid var(--border-color);
-    padding: 12px;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    background-color: #161b22;
-}
-/* Efeito de Cursor Piscante Estilo Terminal */
-.version::after {
-    content: ' |';
-    font-weight: bold;
-    color: var(--accent-green);
-    animation: blink 1s infinite;
-}
-
-/* Regra da Animação (Keyframes) */
-@keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
 }

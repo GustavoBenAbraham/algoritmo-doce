@@ -12,7 +12,66 @@ function typeWriter() {
     }
 }
 
-// Sistema de Toast de Notificação
+// Lógica do Carrinho de Compras
+const cart = {
+    'brigadeiro': { name: 'Brigadeiro Gourmet', qty: 0, price: 5.00 },
+    'pacoca': { name: 'Paçoca Gourmet', qty: 0, price: 5.00 },
+    'beijinho': { name: 'Beijinho Gourmet', qty: 0, price: 5.00 },
+    'bicho-de-pe': { name: 'Bicho de Pé Gourmet', qty: 0, price: 5.00 }
+};
+
+function changeQty(itemKey, delta) {
+    if (cart[itemKey]) {
+        cart[itemKey].qty = Math.max(0, cart[itemKey].qty + delta);
+        document.getElementById(`qty-${itemKey}`).innerText = cart[itemKey].qty;
+        updateCartTotal();
+    }
+}
+
+function updateCartTotal() {
+    let total = 0;
+    for (const key in cart) {
+        total += cart[key].qty * cart[key].price;
+    }
+    document.getElementById("cart-total").innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+function checkoutOrder() {
+    let orderSummary = "";
+    let total = 0;
+
+    for (const key in cart) {
+        if (cart[key].qty > 0) {
+            const itemTotal = cart[key].qty * cart[key].price;
+            total += itemTotal;
+            orderSummary += `• ${cart[key].qty}x ${cart[key].name} (R$ ${itemTotal.toFixed(2).replace('.', ',')})\n`;
+        }
+    }
+
+    if (total === 0) {
+        showToast("[ERRO]: Selecione pelo menos 1 produto no carrinho!");
+        return;
+    }
+
+    const paymentMethod = document.getElementById("payment-method").value;
+    
+    // Formatação estilo Logs Dev para o WhatsApp
+    const message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
+                    `*ITENS DO CARRINHO:*\n${orderSummary}\n` +
+                    `*VALOR TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
+                    `*FORMA DE PAGAMENTO:* ${paymentMethod}\n\n` +
+                    `_Aguardando confirmação para preparo!_`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/5511979865999?text=${encodedMessage}`;
+
+    showToast("[SUCCESS]: Compilando pedido e abrindo WhatsApp...");
+    setTimeout(() => {
+        window.open(whatsappUrl, "_blank");
+    }, 1000);
+}
+
+// Toast System
 function showToast(message) {
     const toast = document.getElementById("system-toast");
     if (toast) {
@@ -24,7 +83,7 @@ function showToast(message) {
     }
 }
 
-// Lógica do CLI Interativo
+// Console CLI Interativo
 function initCLI() {
     const input = document.getElementById("cli-input");
     const output = document.getElementById("cli-output");
@@ -42,14 +101,10 @@ function initCLI() {
                     output.innerText = "Comandos: 'pedir', 'cupom', 'limpar', 'status'";
                     break;
                 case "pedir":
-                    output.innerText = "[SYSTEM]: Redirecionando para o WhatsApp...";
-                    showToast("[SUCCESS]: Abrindo protocolo de atendimento via WhatsApp!");
-                    setTimeout(() => {
-                        window.open("https://wa.me/5511979865999?text=Olá!%20Vim%20pelo%20terminal!", "_blank");
-                    }, 1000);
+                    checkoutOrder();
                     break;
                 case "cupom":
-                    output.innerText = "[CUPOM ENCONTRADO]: Use 'DEV10' para 10% de desconto na primeira caixinha!";
+                    output.innerText = "[CUPOM ENCONTRADO]: Use 'DEV10' no WhatsApp para 10% de desconto!";
                     showToast("[PROMO]: Cupom DEV10 ativado!");
                     break;
                 case "status":
@@ -66,19 +121,7 @@ function initCLI() {
     });
 }
 
-// Evento ao Clicar no Botão do WhatsApp
-function initButtons() {
-    const btnWhatsapp = document.getElementById("btn-whatsapp");
-    if (btnWhatsapp) {
-        btnWhatsapp.addEventListener("click", () => {
-            showToast("[SUCCESS]: Conectando ao WhatsApp do Dev Confeiteiro...");
-        });
-    }
-}
-
-// Inicializa todos os módulos ao carregar a página
 window.onload = function () {
     typeWriter();
     initCLI();
-    initButtons();
 };

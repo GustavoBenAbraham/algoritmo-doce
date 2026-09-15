@@ -21,7 +21,7 @@
             <p class="version">v1.0.0</p>
             <p class="tagline">Brigadeiros gourmet artesanais.</p>
 
-            <!-- Bloco do Catálogo em formato de código -->
+            <!-- Bloco do Catálogo -->
             <div class="code-block">
                 <p class="code-comment">// catálogo de sabores disponíveis</p>
                 <pre><code>const menu = {
@@ -32,29 +32,81 @@
 };</code></pre>
             </div>
 
-            <!-- Seção de Sabores (Instâncias dos Produtos) -->
+            <!-- Seção de Sabores com Espaço para Fotos (4 Produtos) -->
             <div class="products-container">
                 <p class="code-comment">// instâncias dos produtos</p>
-                
+
+                <!-- Produto 1 -->
                 <div class="product-card">
+                    <div class="product-img-placeholder">
+                        <img src="assets/brigadeiro.jpg" alt="Brigadeiro Gourmet" onerror="this.style.display='none'">
+                        <span>[ FOTO_001 ]</span>
+                    </div>
                     <span class="product-id">PRODUCT_001</span>
                     <h3 class="product-name">BRIGADEIRO</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                 </div>
 
+                <!-- Produto 2 -->
                 <div class="product-card">
+                    <div class="product-img-placeholder">
+                        <img src="assets/pacoca.jpg" alt="Paçoca Gourmet" onerror="this.style.display='none'">
+                        <span>[ FOTO_002 ]</span>
+                    </div>
                     <span class="product-id">PRODUCT_002</span>
                     <h3 class="product-name">PAÇOCA</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                 </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <div class="product-img-placeholder">
+                        <img src="assets/beijinho.jpg" alt="Beijinho Gourmet" onerror="this.style.display='none'">
+                        <span>[ FOTO_003 ]</span>
+                    </div>
+                    <span class="product-id">PRODUCT_003</span>
+                    <h3 class="product-name">BEIJINHO</h3>
+                    <span class="product-tag">Gourmet</span>
+                    <p class="product-price">R$ 5,00 / un</p>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <div class="product-img-placeholder">
+                        <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé Gourmet" onerror="this.style.display='none'">
+                        <span>[ FOTO_004 ]</span>
+                    </div>
+                    <span class="product-id">PRODUCT_004</span>
+                    <h3 class="product-name">BICHO DE PÉ</h3>
+                    <span class="product-tag">Gourmet</span>
+                    <p class="product-price">R$ 5,00 / un</p>
+                </div>
             </div>
 
-            <!-- Botões de Ação -->
+            <!-- Botões Principais -->
             <section class="links-section">
                 <a href="https://wa.me/5511979865999?text=Olá!%20Vim%20pelo%20site%20da%20Algoritmo%20Doce!" target="_blank" class="btn btn-primary">[ FAZER PEDIDO - Caixinhas e Encomendas ]</a>
                 <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" class="btn">[ INSTAGRAM ]</a>
+            </section>
+
+            <!-- Seção Sobre Nós / Historia -->
+            <section class="about-section">
+                <p class="code-comment">// class DeveloperStory extends History</p>
+                <div class="about-card">
+                    <div class="about-img-placeholder">
+                        <img src="assets/foto-fundador.jpg" alt="Fundador da Algoritmo Doce" onerror="this.style.display='none'">
+                        <span>[ SUAFOTO_DEV.PNG ]</span>
+                    </div>
+                    <h2 class="about-title">SOBRE_NÓS()</h2>
+                    <p class="about-text">
+                        A <strong>Algoritmo Doce</strong> nasceu da união entre a paixão pela tecnologia e a arte da confeitaria artesanal.
+                    </p>
+                    <p class="about-text">
+                        O que começou como um projeto paralelo enquanto eu estudava programação se transformou na minha principal fonte de renda e na realização de um sonho. Cada brigadeiro é produzido com a mesma precisão e carinho que dedico ao escrever uma linha de código.
+                    </p>
+                </div>
             </section>
         </main>
     </div>

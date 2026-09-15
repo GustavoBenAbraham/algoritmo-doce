@@ -30,7 +30,7 @@
                 <pre><code><span style="color: var(--accent-blue);">const</span> <span style="color: var(--text-primary);">doces</span> = [<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Brigadeiro'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Paçoca'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Beijinho'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Bicho de Pé'</span><br>];</code></pre>
             </div>
 
-            <!-- Catálogo de Produtos com Carrinho -->
+            <!-- Catálogo de Produtos com Seletor de Quantidade -->
             <div class="products-container">
                 <!-- Produto 1 -->
                 <div class="product-card">
@@ -90,14 +90,14 @@
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
-                        <button class="btn-qty" onclick="changeQty('bicho-de-pe', -1)">-</button>
-                        <span id="qty-bicho-de-pe">0</span>
-                        <button class="btn-qty" onclick="changeQty('bicho-de-pe', 1)">+</button>
+                        <button class="btn-qty" onclick="changeQty('bichoDePe', -1)">-</button>
+                        <span id="qty-bichoDePe">0</span>
+                        <button class="btn-qty" onclick="changeQty('bichoDePe', 1)">+</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Seção de Checkout & Pagamento -->
+            <!-- Seção de Checkout & Botões de Ação -->
             <section class="checkout-section">
                 <p class="code-comment">// const checkout_config = { payment_method }</p>
                 <div class="payment-selector">
@@ -111,11 +111,17 @@
                 </div>
 
                 <div class="cart-summary">
-                    <span>TOTAL_PEDIDO: <strong id="cart-total">R$ 0,00</strong></span>
+                    <span>TOTAL_CARRINHO: <strong id="cart-total">R$ 0,00</strong></span>
                 </div>
 
                 <div class="links-section">
-                    <button onclick="checkoutOrder()" class="btn btn-primary">[ EXECUTAR PEDIDO - WhatsApp ]</button>
+                    <!-- Botão 1: Contato Direto -->
+                    <button onclick="directWhatsApp()" class="btn btn-primary">[ FAZER PEDIDO NO WHATSAPP ]</button>
+                    
+                    <!-- Botão 2: Enviar Carrinho com Quantidades -->
+                    <button onclick="checkoutOrder()" class="btn">[ FINALIZAR PEDIDO DO CARRINHO ]</button>
+                    
+                    <!-- Botão 3: Instagram -->
                     <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" class="btn">[ INSTAGRAM ]</a>
                 </div>
             </section>

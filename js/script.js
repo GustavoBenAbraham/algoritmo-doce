@@ -1,153 +1,152 @@
-// ==========================================
-// ALGORITMO DOCE - SCRIPT PRINCIPAL (v1.8.0)
-// ==========================================
+// Efeito de digitação estilo terminal
+const text = "Brigadeiros gourmet artesanais.";
+const speed = 75;
+let index = 0;
 
-document.addEventListener("DOMContentLoaded", () => {
-    checkStoreStatus();
-    initCLI();
-});
+function typeWriter() {
+    const element = document.getElementById("typing-text");
+    if (element && index < text.length) {
+        element.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+    }
+}
 
-// 1. VERIFICAÇÃO AUTOMÁTICA DE HORÁRIO (09:00 - 21:00)
+// Controle do Status "Ao Vivo" (Verifica horário de atendimento)
 function checkStoreStatus() {
-    const statusTag = document.getElementById("store-status");
-    if (!statusTag) return;
+    const badge = document.getElementById("status-badge");
+    const statusText = document.getElementById("status-text");
+
+    if (!badge || !statusText) return;
 
     const now = new Date();
     const hour = now.getHours();
 
-    // Aberto entre 09:00 e 20:59
+    // Atendimento configurado entre 09:00 e 21:00
     const isOpen = hour >= 9 && hour < 21;
 
     if (isOpen) {
-        statusTag.className = "status-badge online";
-        statusTag.innerHTML = `<span class="status-dot"></span> 🟢 ONLINE | Cozinha Rodando`;
+        badge.className = "status-badge online";
+        statusText.innerText = "ONLINE | Cozinha Rodando";
     } else {
-        statusTag.className = "status-badge offline";
-        statusTag.innerHTML = `<span class="status-dot"></span> 🟡 OFFLINE | Faça seu Agendamento`;
+        badge.className = "status-badge offline";
+        statusText.innerText = "OFFLINE | Faça seu Agendamento";
     }
 }
 
-// 2. CONTROLE DE QUANTIDADE DOS DOCES
-function updateQuantity(id, change) {
-    const qtySpan = document.getElementById(`qty-${id}`);
-    if (!qtySpan) return;
+// Objeto de produtos do carrinho
+const cart = {
+    'brigadeiro': { name: 'Brigadeiro Gourmet', qty: 0, price: 5.00 },
+    'pacoca': { name: 'Paçoca Gourmet', qty: 0, price: 5.00 },
+    'beijinho': { name: 'Beijinho Gourmet', qty: 0, price: 5.00 },
+    'bichoDePe': { name: 'Bicho de Pé Gourmet', qty: 0, price: 5.00 }
+};
 
-    let currentQty = parseInt(qtySpan.innerText) || 0;
-    currentQty += change;
-
-    if (currentQty < 0) currentQty = 0;
-    qtySpan.innerText = currentQty;
-
-    // Destaca o card visualmente se tiver itens selecionados
-    const card = qtySpan.closest('.product-card');
-    if (card) {
-        if (currentQty > 0) {
-            card.classList.add('has-items');
-        } else {
-            card.classList.remove('has-items');
+function changeQty(itemKey, delta) {
+    if (cart[itemKey]) {
+        cart[itemKey].qty = Math.max(0, cart[itemKey].qty + delta);
+        const qtyDisplay = document.getElementById(`qty-${itemKey}`);
+        if (qtyDisplay) {
+            qtyDisplay.innerText = cart[itemKey].qty;
         }
+        updateCartTotal();
     }
-
-    calculateTotal();
 }
 
-// 3. CÁLCULO DO TOTAL DO PEDIDO
-function calculateTotal() {
-    const products = document.querySelectorAll('.product-card');
+function updateCartTotal() {
     let total = 0;
-
-    products.forEach(card => {
-        const priceText = card.querySelector('.price')?.innerText || "R$ 0";
-        const price = parseFloat(priceText.replace('R$', '').replace(',', '.').trim());
-        const qty = parseInt(card.querySelector('.qty-val')?.innerText) || 0;
-
-        total += price * qty;
-    });
-
-    const totalElement = document.getElementById('total-price');
-    if (totalElement) {
-        totalElement.innerText = total.toFixed(2).replace('.', ',');
+    for (const key in cart) {
+        total += cart[key].qty * cart[key].price;
+    }
+    const totalDisplay = document.getElementById("cart-total");
+    if (totalDisplay) {
+        totalDisplay.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 }
 
-// 4. ENVIO DO PEDIDO PARA O WHATSAPP
 function sendOrder() {
-    const products = document.querySelectorAll('.product-card');
-    let itemsList = [];
+    let orderSummary = "";
     let total = 0;
 
-    products.forEach(card => {
-        const name = card.querySelector('h3')?.innerText || "Doce";
-        const qty = parseInt(card.querySelector('.qty-val')?.innerText) || 0;
-        const priceText = card.querySelector('.price')?.innerText || "R$ 0";
-        const price = parseFloat(priceText.replace('R$', '').replace(',', '.').trim());
-
-        if (qty > 0) {
-            itemsList.push(`• ${qty}x ${name} (R$ ${(price * qty).toFixed(2)})`);
-            total += price * qty;
+    for (const key in cart) {
+        if (cart[key].qty > 0) {
+            const itemTotal = cart[key].qty * cart[key].price;
+            total += itemTotal;
+            orderSummary += `• ${cart[key].qty}x ${cart[key].name} (R$ ${itemTotal.toFixed(2).replace('.', ',')})\n`;
         }
-    });
-
-    if (itemsList.length === 0) {
-        alert("Seu carrinho está vazio! Selecione pelo menos um doce antes de fazer o checkout.");
-        return;
     }
 
-    const phone = "5511999999999"; // Substitua pelo seu número real com DDD
-    let message = `*--- [ NOVO PEDIDO: ALGORITMO DOCE ] ---*\n\n`;
-    message += `*ITENS SOLICITADOS:*\n${itemsList.join('\n')}\n\n`;
-    message += `*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
-    message += `Aguardando confirmação de disponibilidade e taxa de entrega!`;
+    const paymentMethod = document.getElementById("payment-method").value;
+    let message = "";
+
+    if (total > 0) {
+        message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
+                  `*ITENS DO PEDIDO:*\n${orderSummary}\n` +
+                  `*VALOR TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
+                  `*FORMA DE PAGAMENTO:* ${paymentMethod}\n\n` +
+                  `_Aguardando confirmação para preparo!_`;
+    } else {
+        message = `Olá! Gostaria de fazer um pedido na Algoritmo Doce! 🍫`;
+    }
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
+    const whatsappUrl = `https://wa.me/5511979865999?text=${encodedMessage}`;
+
+    window.location.href = whatsappUrl;
 }
 
-// 5. TERMINAL INTERATIVO (CLI)
+// Toast System
+function showToast(message) {
+    const toast = document.getElementById("system-toast");
+    if (toast) {
+        toast.innerText = message;
+        toast.classList.remove("hidden");
+        setTimeout(() => {
+            toast.classList.add("hidden");
+        }, 3500);
+    }
+}
+
+// Console CLI Interativo
 function initCLI() {
     const input = document.getElementById("cli-input");
     const output = document.getElementById("cli-output");
 
     if (!input || !output) return;
 
-    input.addEventListener("keydown", (e) => {
+    input.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
             const command = input.value.trim().toLowerCase();
             input.value = "";
 
             switch (command) {
-                case "help":
                 case "ajuda":
-                    output.innerText = "[HELP]: Comandos disponíveis: cardapio, ingredientes, faq, total, limpar, contato";
+                case "help":
+                    output.innerText = "Comandos: 'pedir', 'cupom', 'limpar', 'status'";
                     break;
-                case "cardapio":
-                    output.innerText = "[CARDÁPIO]: Brigadeiro, Paçoca, Beijinho e Bicho de Pé disponíveis no catálogo acima!";
+                case "pedir":
+                    sendOrder();
                     break;
-                case "ingredientes":
-                    output.innerText = "[INGREDIENTES]: Usamos ingredientes nobres, cacau 50%, leite condensado e paçoca artesanal!";
+                case "cupom":
+                    output.innerText = "[CUPOM ENCONTRADO]: Use 'DEV10' no WhatsApp para 10% de desconto!";
+                    showToast("[PROMO]: Cupom DEV10 ativado!");
                     break;
-                case "faq":
-                    output.innerText = "[FAQ]: Validade de 5 dias | Entregas via delivery/retirada | Aceitamos encomendas!";
-                    break;
-                case "total":
-                    const totalVal = document.getElementById("total-price")?.innerText || "0,00";
-                    output.innerText = `[TOTAL ATUAL]: R$ ${totalVal}`;
+                case "status":
+                    output.innerText = "[STATUS]: Produção ativa | Modo Gourmet ON | Glicose 100%";
                     break;
                 case "limpar":
                 case "clear":
-                    output.innerText = "Aguardando comando... (digite 'help')";
-                    break;
-                case "contato":
-                    output.innerText = "[CONTATO]: Chama no WhatsApp pelo botão de checkout ou via Instagram @algoritmodoce.java";
-                    break;
-                case "sudo pedir tudo":
-                    document.querySelectorAll('.qty-val').forEach(el => el.innerText = "1");
-                    calculateTotal();
-                    output.innerText = "[EASTER EGG]: 1 de cada doce adicionado ao carrinho com sucesso!";
+                    output.innerText = "Terminal pronto. Digite 'ajuda' para ver comandos.";
                     break;
                 default:
-                    output.innerText = `[ERR 404]: Comando '${command}' não reconhecido. Digite 'help' para ver as opções.`;
+                    output.innerText = `Comando desconhecido: '${command}'. Digite 'ajuda'.`;
             }
         }
     });
 }
+
+window.onload = function () {
+    typeWriter();
+    checkStoreStatus();
+    initCLI();
+};

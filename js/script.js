@@ -120,7 +120,7 @@ function showToast(message) {
     }
 }
 
-// Console CLI Interativo
+// Console CLI Interativo (Corrigido)
 function initCLI() {
     const input = document.getElementById("cli-input");
     const output = document.getElementById("cli-output");
@@ -141,25 +141,26 @@ function initCLI() {
                     sendOrder();
                     break;
                 case "cupom":
-                    output.innerText = "[CUPOM ENCONTRADO]: Use 'DEV10' no WhatsApp para 10% de desconto!";
-                    showToast("[PROMO]: Cupom DEV10 ativado!");
-                    break;
-                case "status":
-                    output.innerText = "[STATUS]: Produção ativa | Modo Gourmet ON | Glicose 100%";
+                    showToast("Cupom DEV10 aplicado! (Simulação)");
+                    output.innerText = "Cupom DEV10 ativo!";
                     break;
                 case "limpar":
-                case "clear":
                     output.innerText = "Terminal pronto. Digite 'ajuda' para ver comandos.";
                     break;
+                case "status":
+                    const now = new Date();
+                    output.innerText = `Horário atual: ${now.toLocaleTimeString('pt-BR')}`;
+                    break;
                 default:
-                    output.innerText = `Comando desconhecido: '${command}'. Digite 'ajuda'.`;
+                    output.innerText = `Comando '${command}' não encontrado. Digite 'ajuda'.`;
             }
         }
     });
 }
 
-window.onload = function () {
+// Inicialização das funções ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
     typeWriter();
     checkStoreStatus();
     initCLI();
-};
+});

@@ -30,13 +30,13 @@
             <!-- Bloco de Código Fake -->
             <div class="code-block">
                 <p class="code-comment">// const menu = getGourmetCatalog();</p>
-                <pre><code><span style="color: var(--accent-blue);">const</span> <span style="color: var(--text-primary);">doces</span> = [<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Brigadeiro'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Paçoca'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Beijinho'</span>,<br>&nbsp;&nbsp;<span style="color: #a5d6ff;">'Bicho de Pé'</span><br>];</code></pre>
+                <pre><code><span style="color: var(--accent-blue);">const</span> <span style="color: var(--text-primary);">doces</span> = [<br>  <span style="color: #a5d6ff;">'Brigadeiro'</span>,<br>  <span style="color: #a5d6ff;">'Paçoca'</span>,<br>  <span style="color: #a5d6ff;">'Beijinho'</span>,<br>  <span style="color: #a5d6ff;">'Bicho de Pé'</span><br>];</code></pre>
             </div>
 
-            <!-- Catálogo de Produtos com Fotos -->
+            <!-- Catálogo de Produtos -->
             <div class="products-container">
                 <!-- Produto 1 -->
-                <div class="product-card">
+                <div class="product-card" id="card-brigadeiro">
                     <div class="product-img-placeholder">
                         <img src="assets/brigadeiro.jpg" alt="Brigadeiro Gourmet" onerror="this.style.display='none'">
                     </div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Produto 2 -->
-                <div class="product-card">
+                <div class="product-card" id="card-pacoca">
                     <div class="product-img-placeholder">
                         <img src="assets/pacoca.jpg" alt="Paçoca Gourmet" onerror="this.style.display='none'">
                     </div>
@@ -68,7 +68,7 @@
                 </div>
 
                 <!-- Produto 3 -->
-                <div class="product-card">
+                <div class="product-card" id="card-beijinho">
                     <div class="product-img-placeholder">
                         <img src="assets/beijinho.jpg" alt="Beijinho Gourmet" onerror="this.style.display='none'">
                     </div>
@@ -84,7 +84,7 @@
                 </div>
 
                 <!-- Produto 4 -->
-                <div class="product-card">
+                <div class="product-card" id="card-bichoDePe">
                     <div class="product-img-placeholder">
                         <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé Gourmet" onerror="this.style.display='none'">
                     </div>
@@ -123,7 +123,7 @@
                 </div>
             </section>
 
-            <!-- Seção Code Reviews (Depoimentos) -->
+            <!-- Seção Code Reviews (Depoimentos Fixos) -->
             <section class="reviews-section">
                 <p class="code-comment">// git log --reviews --approved</p>
                 <div class="reviews-header">
@@ -131,8 +131,7 @@
                 </div>
 
                 <div class="reviews-list">
-                    <!-- Review 1 -->
-                    <div class="review-card">
+                    <article class="review-card">
                         <div class="review-top">
                             <span class="review-pr">PR #102 MERGED</span>
                             <span class="review-stars">★★★★★</span>
@@ -142,10 +141,9 @@
                             <span class="author-user">@dev_lucas</span>
                             <span class="author-role">Fullstack Engineer</span>
                         </div>
-                    </div>
+                    </article>
 
-                    <!-- Review 2 -->
-                    <div class="review-card">
+                    <article class="review-card">
                         <div class="review-top">
                             <span class="review-pr">PR #089 MERGED</span>
                             <span class="review-stars">★★★★★</span>
@@ -155,54 +153,11 @@
                             <span class="author-user">@mariana.tech</span>
                             <span class="author-role">Frontend Developer</span>
                         </div>
-                    </div>
-
-                    <!-- Review 3 -->
-                    <div class="review-card">
-                        <div class="review-top">
-                            <span class="review-pr">PR #074 MERGED</span>
-                            <span class="review-stars">★★★★★</span>
-                        </div>
-                        <p class="review-comment">"Entrega rápida e embalagem caprichada. Já virou vício do nosso time no escritório."</p>
-                        <div class="review-author">
-                            <span class="author-user">@carlos_backend</span>
-                            <span class="author-role">Tech Lead</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-<!-- Code Reviews (Depoimentos Fixos) -->
-            <section class="reviews-section">
-                <div class="reviews-header">
-                    <h3 class="reviews-title">$ git log --reviews</h3>
-                </div>
-                <div class="reviews-list">
-                    <article class="review-card">
-                        <div class="review-top">
-                            <span class="review-pr">PR #42 MERGED</span>
-                            <span class="review-stars">★★★★★</span>
-                        </div>
-                        <p class="review-comment">"O brigadeiro de paçoca resolveu meus bugs de ansiedade antes do deploy."</p>
-                        <div class="review-author">
-                            <span class="author-user">@dev_senior</span>
-                            <span class="author-role">• Tech Lead</span>
-                        </div>
-                    </article>
-                    <article class="review-card">
-                        <div class="review-top">
-                            <span class="review-pr">PR #108 MERGED</span>
-                            <span class="review-stars">★★★★★</span>
-                        </div>
-                        <p class="review-comment">"Entrega rápida e produto em alta disponibilidade. Recomendo o Bicho de Pé!"</p>
-                        <div class="review-author">
-                            <span class="author-user">@frontend_ninja</span>
-                            <span class="author-role">• Full Stack</span>
-                        </div>
                     </article>
                 </div>
             </section>
 
-            <!-- Seção Community Code Reviews (Giscus - GitHub Discussions) -->
+            <!-- Seção Community Code Reviews (Giscus) -->
             <section class="comments-section">
                 <div class="comments-card">
                     <h3 class="comments-title">$ git log --community-reviews</h3>
@@ -229,17 +184,12 @@
                 </div>
             </section>
 
-            <!-- API Docs (Ingredientes & FAQ) -->
-            <section class="docs-section">
-                ...
-
-<!-- Seção API Docs (Ingredientes & Dúvidas) -->
+            <!-- Seção API Docs (Ingredientes & Dúvidas) -->
             <section class="docs-section">
                 <p class="code-comment">// import { ingredients, faq } from 'algoritmo-doce/docs';</p>
                 <div class="docs-card">
                     <h3 class="docs-title">API_DOCS (Ingredientes & FAQ)</h3>
                     
-                    <!-- Aba de Ingredientes -->
                     <div class="doc-block">
                         <h4 class="doc-subtitle">getIngredients()</h4>
                         <ul class="ingredients-list">
@@ -250,7 +200,6 @@
                         </ul>
                     </div>
 
-                    <!-- Aba de Dúvidas Frequentes -->
                     <div class="doc-block">
                         <h4 class="doc-subtitle">getFAQ()</h4>
                         <details class="faq-item">
@@ -281,7 +230,7 @@
                         A <strong>Algoritmo Doce</strong> nasceu da união entre a paixão pela tecnologia e a arte da confeitaria artesanal.
                     </p>
                     <p class="about-text">
-                        O que começou como um projeto paralelo enquanto eu estudava programação se transformou na minha principal fonte de renda e na realização de um sonho. Cada brigadeiro é produzido com a mesma precisão e carinho que dedico ao escrever uma linha de código.
+                        O que começou como um projeto paralelo enquanto eu estudava programação se transformou na minha principal fonte de renda e na realização de um sonho.
                     </p>
                 </div>
             </section>

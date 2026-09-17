@@ -45,10 +45,22 @@ const cart = {
 function changeQty(itemKey, delta) {
     if (cart[itemKey]) {
         cart[itemKey].qty = Math.max(0, cart[itemKey].qty + delta);
+        
         const qtyDisplay = document.getElementById(`qty-${itemKey}`);
         if (qtyDisplay) {
             qtyDisplay.innerText = cart[itemKey].qty;
         }
+
+        // Destaque sutil no card do produto selecionado
+        const cardElement = document.getElementById(`card-${itemKey}`);
+        if (cardElement) {
+            if (cart[itemKey].qty > 0) {
+                cardElement.classList.add("has-items");
+            } else {
+                cardElement.classList.remove("has-items");
+            }
+        }
+
         updateCartTotal();
     }
 }
@@ -76,7 +88,8 @@ function sendOrder() {
         }
     }
 
-    const paymentMethod = document.getElementById("payment-method").value;
+    const paymentSelect = document.getElementById("payment-method");
+    const paymentMethod = paymentSelect ? paymentSelect.value : "Pix";
     let message = "";
 
     if (total > 0) {

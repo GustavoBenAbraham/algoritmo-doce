@@ -161,12 +161,15 @@ function initCLI() {
 function initCandyRain() {
     const canvas = document.getElementById("candy-rain");
     const context = canvas ? canvas.getContext("2d") : null;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!canvas || !context || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!canvas || !context) return;
 
     const candies = ["🍬", "🍫", "🍭", "🧁", "🍩", "🍪"];
     const particles = [];
+    const animationFactor = reduceMotion ? 0.6 : 1.2;
     let animationFrame;
+    let isAnimating = false;
     let lastTime = 0;
 
     function resizeCanvas() {
@@ -176,7 +179,8 @@ function initCandyRain() {
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 
         particles.length = 0;
-        const particleCount = Math.min(32, Math.max(12, Math.round(window.innerWidth / 32)));
+        const minimumParticles = reduceMotion ? 8 : 12;
+        const particleCount = Math.min(32, Math.max(minimumParticles, Math.round(window.innerWidth / 32)));
 
         for (let index = 0; index < particleCount; index++) {
             particles.push({
@@ -190,14 +194,22 @@ function initCandyRain() {
         }
     }
 
-    function animate(time) {
-        const delta = Math.min((time - lastTime) / 1000 || 0, 0.05);
-        lastTime = time;
+    function renderParticles() {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
         for (const particle of particles) {
-            particle.y += particle.speed * delta;
-            particle.x += particle.drift * delta;
+            context.font = `${particle.size}px serif`;
+            context.fillText(particle.emoji, particle.x, particle.y);
+        }
+    }
+
+    function animate(time) {
+        const delta = Math.min((time - lastTime) / 1000 || 0, 0.05);
+        lastTime = time;
+
+        for (const particle of particles) {
+            particle.y += particle.speed * delta * animationFactor;
+            particle.x += particle.drift * delta * animationFactor;
 
             if (particle.y > window.innerHeight + particle.size) {
                 particle.y = -particle.size;
@@ -206,27 +218,42 @@ function initCandyRain() {
 
             if (particle.x < -particle.size) particle.x = window.innerWidth + particle.size;
             if (particle.x > window.innerWidth + particle.size) particle.x = -particle.size;
-
-            context.font = `${particle.size}px serif`;
-            context.fillText(particle.emoji, particle.x, particle.y);
         }
+
+        renderParticles();
 
         animationFrame = window.requestAnimationFrame(animate);
     }
 
+    function startAnimation() {
+        if (isAnimating) return;
+        isAnimating = true;
+        lastTime = 0;
+        animationFrame = window.requestAnimationFrame(animate);
+    }
+
+    function stopAnimation() {
+        if (!isAnimating) return;
+        isAnimating = false;
+        window.cancelAnimationFrame(animationFrame);
+        lastTime = 0;
+    }
+
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas, { passive: true });
+    window.addEventListener("resize", () => {
+        resizeCanvas();
+        if (reduceMotion) renderParticles();
+    }, { passive: true });
 
     document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
-            window.cancelAnimationFrame(animationFrame);
-            lastTime = 0;
+            stopAnimation();
         } else {
-            animationFrame = window.requestAnimationFrame(animate);
+            startAnimation();
         }
     });
 
-    animationFrame = window.requestAnimationFrame(animate);
+    startAnimation();
 }
 
 // Inicialização das funções ao carregar a página

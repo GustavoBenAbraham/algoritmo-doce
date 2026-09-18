@@ -158,10 +158,82 @@ function initCLI() {
     });
 }
 
+function initCandyRain() {
+    const canvas = document.getElementById("candy-rain");
+    const context = canvas ? canvas.getContext("2d") : null;
+
+    if (!canvas || !context || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const candies = ["🍬", "🍫", "🍭", "🧁", "🍩", "🍪"];
+    const particles = [];
+    let animationFrame;
+    let lastTime = 0;
+
+    function resizeCanvas() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * pixelRatio;
+        canvas.height = window.innerHeight * pixelRatio;
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+        particles.length = 0;
+        const particleCount = Math.min(32, Math.max(12, Math.round(window.innerWidth / 32)));
+
+        for (let index = 0; index < particleCount; index++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                speed: 24 + Math.random() * 34,
+                drift: (Math.random() - 0.5) * 12,
+                size: 14 + Math.random() * 8,
+                emoji: candies[Math.floor(Math.random() * candies.length)]
+            });
+        }
+    }
+
+    function animate(time) {
+        const delta = Math.min((time - lastTime) / 1000 || 0, 0.05);
+        lastTime = time;
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (const particle of particles) {
+            particle.y += particle.speed * delta;
+            particle.x += particle.drift * delta;
+
+            if (particle.y > window.innerHeight + particle.size) {
+                particle.y = -particle.size;
+                particle.x = Math.random() * window.innerWidth;
+            }
+
+            if (particle.x < -particle.size) particle.x = window.innerWidth + particle.size;
+            if (particle.x > window.innerWidth + particle.size) particle.x = -particle.size;
+
+            context.font = `${particle.size}px serif`;
+            context.fillText(particle.emoji, particle.x, particle.y);
+        }
+
+        animationFrame = window.requestAnimationFrame(animate);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            window.cancelAnimationFrame(animationFrame);
+            lastTime = 0;
+        } else {
+            animationFrame = window.requestAnimationFrame(animate);
+        }
+    });
+
+    animationFrame = window.requestAnimationFrame(animate);
+}
+
 // Inicialização das funções ao carregar a página
 document.addEventListener("DOMContentLoaded", () => {
     typeWriter();
     checkStoreStatus();
     setInterval(checkStoreStatus, 60000);
     initCLI();
+    initCandyRain();
 });

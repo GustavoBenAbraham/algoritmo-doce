@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algoritmo Doce - Dev & Gourmet</title>
+    <meta name="description" content="Doces gourmet artesanais da Algoritmo Doce, com pedidos pelo WhatsApp e entrega combinada.">
+    <link rel="canonical" href="https://gustavobenabraham.github.io/algoritmo-doce/">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <!-- Toast Notification -->
-    <div id="system-toast" class="toast hidden"></div>
+    <div id="system-toast" class="toast hidden" role="status" aria-live="polite"></div>
 
     <div class="terminal-container">
         <!-- Cabeçalho do Terminal com Status Ao Vivo -->
@@ -38,64 +40,64 @@
                 <!-- Produto 1 -->
                 <div class="product-card" id="card-brigadeiro">
                     <div class="product-img-placeholder">
-                        <img src="assets/brigadeiro.jpg" alt="Brigadeiro Gourmet" onerror="this.style.display='none'">
+                        <img src="assets/brigadeiro.jpg" alt="Brigadeiro Gourmet" width="200" height="100" loading="eager" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <span class="product-id">PRODUCT_001</span>
                     <h3 class="product-name">BRIGADEIRO</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
-                        <button class="btn-qty" onclick="changeQty('brigadeiro', -1)">-</button>
-                        <span id="qty-brigadeiro">0</span>
-                        <button class="btn-qty" onclick="changeQty('brigadeiro', 1)">+</button>
+                        <button class="btn-qty" type="button" aria-label="Remover um brigadeiro" onclick="changeQty('brigadeiro', -1)">-</button>
+                        <span id="qty-brigadeiro" aria-label="Quantidade de brigadeiros" aria-live="polite">0</span>
+                        <button class="btn-qty" type="button" aria-label="Adicionar um brigadeiro" onclick="changeQty('brigadeiro', 1)">+</button>
                     </div>
                 </div>
 
                 <!-- Produto 2 -->
                 <div class="product-card" id="card-pacoca">
                     <div class="product-img-placeholder">
-                        <img src="assets/pacoca.jpg" alt="Paçoca Gourmet" onerror="this.style.display='none'">
+                        <img src="assets/pacoca.jpg" alt="Paçoca Gourmet" width="200" height="100" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <span class="product-id">PRODUCT_002</span>
                     <h3 class="product-name">PAÇOCA</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
-                        <button class="btn-qty" onclick="changeQty('pacoca', -1)">-</button>
-                        <span id="qty-pacoca">0</span>
-                        <button class="btn-qty" onclick="changeQty('pacoca', 1)">+</button>
+                        <button class="btn-qty" type="button" aria-label="Remover uma paçoca" onclick="changeQty('pacoca', -1)">-</button>
+                        <span id="qty-pacoca" aria-label="Quantidade de paçocas" aria-live="polite">0</span>
+                        <button class="btn-qty" type="button" aria-label="Adicionar uma paçoca" onclick="changeQty('pacoca', 1)">+</button>
                     </div>
                 </div>
 
                 <!-- Produto 3 -->
                 <div class="product-card" id="card-beijinho">
                     <div class="product-img-placeholder">
-                        <img src="assets/beijinho.jpg" alt="Beijinho Gourmet" onerror="this.style.display='none'">
+                        <img src="assets/beijinho.jpg" alt="Beijinho Gourmet" width="200" height="100" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <span class="product-id">PRODUCT_003</span>
                     <h3 class="product-name">BEIJINHO</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
-                        <button class="btn-qty" onclick="changeQty('beijinho', -1)">-</button>
-                        <span id="qty-beijinho">0</span>
-                        <button class="btn-qty" onclick="changeQty('beijinho', 1)">+</button>
+                        <button class="btn-qty" type="button" aria-label="Remover um beijinho" onclick="changeQty('beijinho', -1)">-</button>
+                        <span id="qty-beijinho" aria-label="Quantidade de beijinhos" aria-live="polite">0</span>
+                        <button class="btn-qty" type="button" aria-label="Adicionar um beijinho" onclick="changeQty('beijinho', 1)">+</button>
                     </div>
                 </div>
 
                 <!-- Produto 4 -->
                 <div class="product-card" id="card-bichoDePe">
                     <div class="product-img-placeholder">
-                        <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé Gourmet" onerror="this.style.display='none'">
+                        <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé Gourmet" width="200" height="100" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <span class="product-id">PRODUCT_004</span>
                     <h3 class="product-name">BICHO DE PÉ</h3>
                     <span class="product-tag">Gourmet</span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
-                        <button class="btn-qty" onclick="changeQty('bichoDePe', -1)">-</button>
-                        <span id="qty-bichoDePe">0</span>
-                        <button class="btn-qty" onclick="changeQty('bichoDePe', 1)">+</button>
+                        <button class="btn-qty" type="button" aria-label="Remover um bicho de pé" onclick="changeQty('bichoDePe', -1)">-</button>
+                        <span id="qty-bichoDePe" aria-label="Quantidade de bichos de pé" aria-live="polite">0</span>
+                        <button class="btn-qty" type="button" aria-label="Adicionar um bicho de pé" onclick="changeQty('bichoDePe', 1)">+</button>
                     </div>
                 </div>
             </div>
@@ -114,12 +116,12 @@
                 </div>
 
                 <div class="cart-summary">
-                    <span>TOTAL_PEDIDO: <strong id="cart-total">R$ 0,00</strong></span>
+                    <span>TOTAL_PEDIDO: <strong id="cart-total" aria-live="polite">R$ 0,00</strong></span>
                 </div>
 
                 <div class="links-section">
-                    <button onclick="sendOrder()" class="btn btn-primary">[ EXECUTAR PEDIDO - WhatsApp ]</button>
-                    <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" class="btn">[ INSTAGRAM ]</a>
+                    <button type="button" onclick="sendOrder()" class="btn btn-primary">[ EXECUTAR PEDIDO - WhatsApp ]</button>
+                    <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn">[ INSTAGRAM ]</a>
                 </div>
             </section>
 
@@ -223,7 +225,7 @@
                 <p class="code-comment">// class DeveloperStory extends History</p>
                 <div class="about-card">
                     <div class="about-img-placeholder">
-                        <img src="assets/foto-fundador.jpg" alt="Foto do Fundador" onerror="this.style.display='none'">
+                        <img src="assets/foto-fundador.jpg" alt="Foto do Fundador" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <h3 class="about-title">SOBRE_NÓS ()</h3>
                     <p class="about-text">

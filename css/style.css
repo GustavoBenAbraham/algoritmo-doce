@@ -257,6 +257,15 @@ code {
     color: var(--accent-color);
 }
 
+.btn-qty:focus-visible,
+.btn:focus-visible,
+.cli-select:focus-visible,
+.cli-input-line input:focus-visible,
+.faq-item summary:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
 /* Seção Checkout & Pagamento */
 .checkout-section {
     width: 100%;

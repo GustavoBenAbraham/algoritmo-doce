@@ -6,7 +6,7 @@ let index = 0;
 function typeWriter() {
     const element = document.getElementById("typing-text");
     if (element && index < text.length) {
-        element.innerHTML += text.charAt(index);
+        element.textContent += text.charAt(index);
         index++;
         setTimeout(typeWriter, speed);
     }
@@ -127,7 +127,7 @@ function initCLI() {
 
     if (!input || !output) return;
 
-    input.addEventListener("keypress", function (e) {
+    input.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
             const command = input.value.trim().toLowerCase();
             input.value = "";
@@ -162,5 +162,6 @@ function initCLI() {
 document.addEventListener("DOMContentLoaded", () => {
     typeWriter();
     checkStoreStatus();
+    setInterval(checkStoreStatus, 60000);
     initCLI();
 });

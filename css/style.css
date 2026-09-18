@@ -34,6 +34,13 @@ body {
     z-index: 0;
 }
 
+@media (max-width: 470px) {
+    #candy-rain {
+        opacity: 0.2;
+        z-index: 2;
+    }
+}
+
 .terminal-container {
     width: 100%;
     max-width: 440px;

@@ -2,7 +2,7 @@
 
 > *"Compilando açúcar, paixão e código em brigadeiros artesanais."*
 
-![Versão](https://img.shields.io/badge/version-v1.5.0-d2a8d9?style=for-the-badge)
+![Versão](https://img.shields.io/badge/version-v1.7.0-d2a8d9?style=for-the-badge)
 ![Status](https://img.shields.io/badge/status-ativo-3fb950?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-58a6ff?style=for-the-badge)
 

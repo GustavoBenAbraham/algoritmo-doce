@@ -1,15 +1,18 @@
 // Efeito de digitação estilo terminal
-const text = "Brigadeiros gourmet artesanais.";
-const speed = 75;
-let index = 0;
-
 function typeWriter() {
+    const text = "Brigadeiros gourmet artesanais.";
+    const speed = 75;
+    let index = 0;
     const element = document.getElementById("typing-text");
-    if (element && index < text.length) {
-        element.textContent += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, speed);
+
+    function type() {
+        if (element && index < text.length) {
+            element.textContent += text.charAt(index++);
+            setTimeout(type, speed);
+        }
     }
+
+    type();
 }
 
 // Controle do Status "Ao Vivo" (Verifica horário de atendimento)

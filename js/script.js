@@ -77,6 +77,17 @@ function updateCartTotal() {
     if (totalDisplay) {
         totalDisplay.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
+
+    const btnOrder = document.getElementById("btn-order");
+    if (btnOrder) {
+        if (total > 0) {
+            btnOrder.disabled = false;
+            btnOrder.innerText = "[ EXECUTAR PEDIDO - WhatsApp ]";
+        } else {
+            btnOrder.disabled = true;
+            btnOrder.innerText = "[ SELECIONE UM ITEM ]";
+        }
+    }
 }
 
 function sendOrder() {

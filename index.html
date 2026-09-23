@@ -6,6 +6,28 @@
     <title>Algoritmo Doce - Dev & Gourmet</title>
     <meta name="description" content="Doces gourmet artesanais da Algoritmo Doce, com pedidos pelo WhatsApp e entrega combinada.">
     <link rel="canonical" href="https://gustavobenabraham.github.io/algoritmo-doce/">
+
+    <!-- Favicon emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍫</text></svg>">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gustavobenabraham.github.io/algoritmo-doce/">
+    <meta property="og:title" content="Algoritmo Doce — Dev & Gourmet">
+    <meta property="og:description" content="Brigadeiros gourmet artesanais. Boolean, String, Float e Null. Peça pelo WhatsApp.">
+    <meta property="og:image" content="https://gustavobenabraham.github.io/algoritmo-doce/assets/brigadeiro.jpg">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Algoritmo Doce — Dev & Gourmet">
+    <meta name="twitter:description" content="Brigadeiros gourmet artesanais. Boolean, String, Float e Null.">
+    <meta name="twitter:image" content="https://gustavobenabraham.github.io/algoritmo-doce/assets/brigadeiro.jpg">
+
+    <!-- PWA -->
+    <meta name="theme-color" content="#0d1117">
+    <link rel="manifest" href="manifest.json">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -125,7 +147,7 @@
                 </div>
 
                 <div class="links-section">
-                    <button type="button" onclick="sendOrder()" class="btn btn-primary">[ EXECUTAR PEDIDO - WhatsApp ]</button>
+                    <button type="button" id="btn-order" onclick="sendOrder()" class="btn btn-primary" disabled>[ EXECUTAR PEDIDO - WhatsApp ]</button>
                     <a href="https://www.instagram.com/algoritmodoce.java?stkn=cDJqaW9hMGxndmRu&utm_source=qr" target="_blank" rel="noopener noreferrer" class="btn">[ INSTAGRAM ]</a>
                 </div>
             </section>
@@ -230,7 +252,7 @@
                 <p class="code-comment">// class DeveloperStory extends History</p>
                 <div class="about-card">
                     <div class="about-img-placeholder">
-                        <img src="assets/foto-fundador.jpg" alt="Foto do Fundador" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                        <img src="assets/foto-fundador.jpg" alt="Foto do Fundador" width="400" height="300" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <h3 class="about-title">SOBRE_NÓS ()</h3>
                     <p class="about-text">
@@ -255,6 +277,12 @@
                 </div>
             </section>
         </div>
+
+        <!-- Footer do Terminal -->
+        <footer class="terminal-footer">
+            <span class="footer-left">© 2024 Algoritmo Doce</span>
+            <span class="footer-right">v1.7.0 — MIT License</span>
+        </footer>
     </div>
 
     <script src="js/script.js"></script>

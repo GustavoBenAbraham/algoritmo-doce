@@ -42,7 +42,7 @@ const cart = {
     'brigadeiro': { name: 'Boolean (Brigadeiro Gourmet)', qty: 0, price: 5.00 },
     'pacoca': { name: 'String (Paçoca Gourmet)', qty: 0, price: 5.00 },
     'beijinho': { name: 'Float (Beijinho Gourmet)', qty: 0, price: 5.00 },
-    'bichoDePe': { name: 'NullPtr (Bicho de Pé Gourmet)', qty: 0, price: 5.00 }
+    'bichoDePe': { name: 'Null (Bicho de Pé Gourmet)', qty: 0, price: 5.00 }
 };
 
 function changeQty(itemKey, delta) {

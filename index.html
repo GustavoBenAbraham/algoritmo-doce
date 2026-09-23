@@ -95,9 +95,9 @@
                         <img src="assets/bicho-de-pe.jpg" alt="Bicho de Pé NullPointerException Gourmet" width="200" height="100" loading="lazy" decoding="async" onerror="this.style.display='none'">
                     </div>
                     <span class="product-id">PRODUCT_004</span>
-                    <h3 class="product-name">NullPtr</h3>
+                    <h3 class="product-name">Null</h3>
                     <span class="product-tag">// Bicho de Pé Gourmet</span>
-                    <span class="product-type-badge">throws: <strong>NullPointerException</strong></span>
+                    <span class="product-type-badge">type: <strong>null</strong></span>
                     <p class="product-price">R$ 5,00 / un</p>
                     <div class="qty-controls">
                         <button class="btn-qty" type="button" aria-label="Remover um NullPtr" onclick="changeQty('bichoDePe', -1)">-</button>
@@ -170,7 +170,24 @@
                     <h3 class="comments-title">$ git log --community-reviews</h3>
                     <p class="code-comment">// Deixe seu PR ou feedback registrado via GitHub</p>
                     
-                    <div class="giscus-container"></div>
+                    <div class="giscus-container">
+                        <script src="https://giscus.app/client.js"
+                                data-repo="GustavoBenAbraham/algoritmo-doce-comments"
+                                data-repo-id="R_kgDOUeJlYg"
+                                data-category="General"
+                                data-category-id="DIC_kwDOUeJlYs4DFxg7"
+                                data-mapping="specific"
+                                data-term="Reviews Algoritmo Doce"
+                                data-strict="0"
+                                data-reactions-enabled="1"
+                                data-emit-metadata="0"
+                                data-input-position="bottom"
+                                data-theme="dark"
+                                data-lang="pt"
+                                crossorigin="anonymous"
+                                async>
+                        </script>
+                    </div>
                 </div>
             </section>
 
@@ -186,7 +203,7 @@
                             <li><strong>Boolean</strong> <span class="ingredients-alias">(Brigadeiro):</span> Leite condensado, creme de leite, cacau em pó 50% e granulado nobre.</li>
                             <li><strong>String</strong> <span class="ingredients-alias">(Paçoca):</span> Leite condensado, creme de leite, paçoca artesanal e amendoim xerem.</li>
                             <li><strong>Float</strong> <span class="ingredients-alias">(Beijinho):</span> Leite condensado, creme de leite, coco ralado úmido e cravo da índia.</li>
-                            <li><strong>NullPtr</strong> <span class="ingredients-alias">(Bicho de Pé):</span> Leite condensado, creme de leite e composto lácteo sabor morango.</li>
+                            <li><strong>Null</strong> <span class="ingredients-alias">(Bicho de Pé):</span> Leite condensado, creme de leite e composto lácteo sabor morango.</li>
                         </ul>
                     </div>
 
@@ -241,21 +258,5 @@
     </div>
 
     <script src="js/script.js"></script>
-    <script src="https://giscus.app/client.js"
-            data-repo="GustavoBenAbraham/algoritmo-doce-comments"
-            data-repo-id="R_kgDOUeJlYg"
-            data-category="General"
-            data-category-id="DIC_kwDOUeJlYs4DFxg7"
-            data-mapping="specific"
-            data-term="Reviews Algoritmo Doce"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="dark"
-            data-lang="pt"
-            crossorigin="anonymous"
-            async>
-    </script>
 </body>
 </html>

@@ -239,8 +239,8 @@ code {
 .product-tag {
     color: var(--accent-color);
     font-size: 0.7rem;
-    display: inline-block;
-    margin-bottom: 4px;
+    display: block;
+    margin-bottom: 2px;
 }
 
 .product-type-badge {

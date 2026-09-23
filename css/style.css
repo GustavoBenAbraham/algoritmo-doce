@@ -240,7 +240,23 @@ code {
     color: var(--accent-color);
     font-size: 0.7rem;
     display: inline-block;
+    margin-bottom: 4px;
+}
+
+.product-type-badge {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.68rem;
     margin-bottom: 6px;
+}
+
+.product-type-badge strong {
+    color: var(--accent-blue);
+}
+
+.ingredients-alias {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
 }
 
 .product-price {

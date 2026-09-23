@@ -39,10 +39,10 @@ function checkStoreStatus() {
 
 // Objeto de produtos do carrinho
 const cart = {
-    'brigadeiro': { name: 'Brigadeiro Gourmet', qty: 0, price: 5.00 },
-    'pacoca': { name: 'Paçoca Gourmet', qty: 0, price: 5.00 },
-    'beijinho': { name: 'Beijinho Gourmet', qty: 0, price: 5.00 },
-    'bichoDePe': { name: 'Bicho de Pé Gourmet', qty: 0, price: 5.00 }
+    'brigadeiro': { name: 'Boolean (Brigadeiro Gourmet)', qty: 0, price: 5.00 },
+    'pacoca': { name: 'String (Paçoca Gourmet)', qty: 0, price: 5.00 },
+    'beijinho': { name: 'Float (Beijinho Gourmet)', qty: 0, price: 5.00 },
+    'bichoDePe': { name: 'NullPtr (Bicho de Pé Gourmet)', qty: 0, price: 5.00 }
 };
 
 function changeQty(itemKey, delta) {
@@ -97,10 +97,10 @@ function sendOrder() {
 
     if (total > 0) {
         message = `*--- NOVO PEDIDO: ALGORITMO DOCE ---*\n\n` +
-                  `*ITENS DO PEDIDO:*\n${orderSummary}\n` +
-                  `*VALOR TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
-                  `*FORMA DE PAGAMENTO:* ${paymentMethod}\n\n` +
-                  `_Aguardando confirmação para preparo!_`;
+                  `*// ITENS DO PEDIDO:*\n${orderSummary}\n` +
+                  `*TOTAL_PEDIDO:* R$ ${total.toFixed(2).replace('.', ',')}\n` +
+                  `*PAYMENT_METHOD:* ${paymentMethod}\n\n` +
+                  `_Status: aguardando confirmação para preparo..._`;
     } else {
         message = `Olá! Gostaria de fazer um pedido na Algoritmo Doce! 🍫`;
     }
